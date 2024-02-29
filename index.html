@@ -55,17 +55,41 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            ...
+            
+            <form action="">
+              <!-- Img -->
+              <div class="mb-3">
+                <label for="imageurl" class="form-label">Image URL</label>
+                <input type="file" class="form-control" id="imageurl" aria-describedby="imageHelp" placeholder="Upload the image">
+                <div id="imageHelp" class="form-text">Upload the image</div>
+              </div>
+              <!-- Title -->
+              <div class="mb-3">
+                <label for="Title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="Title" placeholder="Task Title" required>
+              </div>
+              <!-- Task Tpye -->
+              <div class="mb-3">
+                <label for="Type" class="form-label">Task Type</label>
+                <input type="text" class="form-control" id="Type" placeholder="Type Of Task" required>
+              </div>
+              <!-- Task Desc -->
+              <div class="mb-3">
+                <label for="Description" class="form-label">Task Description</label>
+                <textarea type="text" class="form-control" id="Description" placeholder="Describe your Task..." required rows="4"></textarea>
+              </div>
+            </form>
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Section 3 : Custome Div -->
+    <!-- Section 3 : Custome Div - Small size button -->
     <div class="add_new_btn_mobile_only d-block d-sm-block d-md-none">
       <button class="btn btn-outline-primary" type="submit"
       data-bs-toggle="modal" data-bs-target="#add_new_model">
