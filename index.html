@@ -18,7 +18,7 @@
 </head>
 <body>
 
-    <!-- Section : Navbar -->
+    <!-- Section 1 : Navbar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Tasky Application</a>
@@ -37,18 +37,46 @@
             </li>
           </ul>
       
-          <button class="btn btn-outline-primary" type="submit">
-            <i class="fa-solid fa-plus me-2"></i> Add New Items
+          <button class="btn btn-outline-primary" type="submit"
+          data-bs-toggle="modal" data-bs-target="#add_new_model">
+            <i class="fa-solid fa-plus me-2"></i> Add New
           </button>
         </div>
 
       </div>
     </nav>
 
-    <!-- Section : -->
+      <!-- Section 2 : Modal -->
+    <div class="modal fade" id="add_new_model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Task To Complete</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3 : Custome Div -->
+    <div class="add_new_btn_mobile_only d-block d-sm-block d-md-none">
+      <button class="btn btn-outline-primary" type="submit"
+      data-bs-toggle="modal" data-bs-target="#add_new_model">
+        <i class="fa-solid fa-plus me-2"></i> Add New
+      </button>
+    </div>
+
+    <!-- Section 3 : App Content -->
     <div class="container">
 
-      <!-- Sector : Search Bar -->
+      <!-- Sector : Search Window -->
       <section class="mt-5">
         <div class="row justify-content-center">
           
@@ -64,11 +92,20 @@
         </div>    
       </section>
 
-      <!-- Sector : Cards -->
-      <section></section>
-      
+      <!-- Sector : Cards Setup & Creations -->
+      <section class="mt-5">
+        <div class="row task__contents">
+          <h1>Hey this is the card here</h1>
+        </div>
+      </section>
+
     </div>
 
+
+<!-- ------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ------------------------------------------------------------------------------------------------------------ -->
+    <!-- Scripts -->
     <script src="/index.js"></script>
     <!-- Bootstrap Js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
