@@ -46,22 +46,24 @@
       </div>
     </nav>
 
-      <!-- Section 2 : Modal -->
+    <!-- Section 2 : Add new Modal -->
     <div class="modal fade" id="add_new_model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
+
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Task To Complete</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
+
           <div class="modal-body">
             
             <form action="">
               <!-- Img -->
               <div class="mb-3">
                 <label for="imageurl" class="form-label">Image URL</label>
-                <input type="file" class="form-control" id="imageurl" aria-describedby="imageHelp" placeholder="Upload the image">
-                <div id="imageHelp" class="form-text">Upload the image</div>
+                <input type="url" class="form-control" id="imageurl" aria-describedby="imageHelp" placeholder="https://@image.png/url.com">
+                <div id="imageHelp" class="form-text">Add the Url of the image</div>
               </div>
               <!-- Title -->
               <div class="mb-3">
@@ -78,18 +80,40 @@
                 <label for="Description" class="form-label">Task Description</label>
                 <textarea type="text" class="form-control" id="Description" placeholder="Describe your Task..." required rows="4"></textarea>
               </div>
+
             </form>
 
           </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3 : Open task Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Task Details</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body task__modal__body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Section 3 : Custome Div - Small size button -->
+    <!-- Section 5 : Custome Div - Small size button -->
     <div class="add_new_btn_mobile_only d-block d-sm-block d-md-none">
       <button class="btn btn-outline-primary" type="submit"
       data-bs-toggle="modal" data-bs-target="#add_new_model">
@@ -97,7 +121,7 @@
       </button>
     </div>
 
-    <!-- Section 3 : App Content -->
+    <!-- Section 6 : App Content -->
     <div class="container">
 
       <!-- Sector : Search Window -->
@@ -119,7 +143,7 @@
       <!-- Sector : Cards Setup & Creations -->
       <section class="mt-5">
         <div class="row task__contents">
-          <h1>Hey this is the card here</h1>
+          
         </div>
       </section>
 
