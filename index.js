@@ -22,7 +22,7 @@ const taskBody = document.querySelector('.task__modal__body');
 // Template for the cards on screen
 // `` - this is just like the {} but i used it for HTML writing
 const htmlTaskContent = ({ id, title, description, type, url}) => `
-    <div class="col-md-6 col-lg-4 mt-3" id=${id} key=${id}>
+    <div class="col-sm-6 col-md-4 col-lg-3 mt-3" id=${id} key=${id}>
         <div class="card shadow task__card">
 
             <div class="card-header d-flex justify-content-end task__card__header">
@@ -34,14 +34,14 @@ const htmlTaskContent = ({ id, title, description, type, url}) => `
                 </button>
             </div>
 
-            <div class="card-body">
+            <div class="card-body d-flex flex-column">
                 ${
                     url 
                     ? `<img width='100%' src='${url}' alt='Card Image' class='card-img-top rounded-lg' />`
                     : `<img width='100%' height='150px' style="object-fit: cover; object-position: center"  src="https://tse3.mm.bing.net/th?id=OIP.LZsJaVHEsECjt_hv1KrtbAHaHa&pid=Api&P=0" alt='card image cap' class='card-image-top md-3 rounded-lg' />`
                 }
                 <h4 class="card-title task__card__title">${title}</h4>
-                <p class="descriptions trim-3-lines text-muted">${description}</p>
+                <p class="descriptions text-muted">${description}</p>
                 <div class="Type text-white d-flex flex-wrap">
                     <span class="badge rounded-pill text-bg-primary">${type}</span>
                 </div>
