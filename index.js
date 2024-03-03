@@ -26,7 +26,7 @@ const htmlTaskContent = ({ id, title, description, type, url}) => `
         <div class="card shadow task__card">
 
             <div class="card-header d-flex justify-content-end task__card__header">
-                <button type="button" class="btn btn-outline-info m-2" name=${id}>
+                <button type="button" class="btn btn-outline-primary m-2" name=${id}>
                     <i class="fa-solid fa-pencil" name=${id}></i>
                 </button>
                 <button type="button" class="btn btn-outline-danger m-2" name=${id}>
@@ -38,7 +38,7 @@ const htmlTaskContent = ({ id, title, description, type, url}) => `
                 ${
                     url 
                     ? `<img width='100%' src='${url}' alt='Card Image' class='card-img-top rounded-lg' />`
-                    : `<img width='100%' height='150px' style="object-fit: cover; object-position: center"  src="https://tse3.mm.bing.net/th?id=OIP.LZsJaVHEsECjt_hv1KrtbAHaHa&pid=Api&P=0" alt='card image cap' class='card-image-top md-3 rounded-lg' />`
+                    : `<img width='100%' height='150%' style="object-fit: cover; object-position: center"  src="https://tse3.mm.bing.net/th?id=OIP.LZsJaVHEsECjt_hv1KrtbAHaHa&pid=Api&P=0" alt='card image cap' class='card-image-top md-3 rounded-lg' />`
                 }
                 <h4 class="card-title task__card__title">${title}</h4>
                 <p class="descriptions text-muted">${description}</p>
@@ -48,7 +48,7 @@ const htmlTaskContent = ({ id, title, description, type, url}) => `
             </div>
 
             <div class="card-footer">
-                <button type="button" class="btn btn-outline-primary float-right" data-bs-toggle="modal" data-bs-target="#openModel">Open Task</button>
+                <button type="button" class="btn btn-outline-primary float-right" data-bs-toggle="modal" data-bs-target="#openModel" id="${id}" onclick="OpenTask()">Open Task</button>
             </div>
 
         </div>
@@ -63,7 +63,7 @@ const htmlModelContent = ({ id, title, description, url}) => {
             ${
                 url 
                 ? `<img width='100%' src='${url}' alt='Card Image' class='card-img-top rounded-lg' />`
-                : `<img width='100%' height='150px' style="object-fit: cover; object-position: center"  src="https://tse3.mm.bing.net/th?id=OIP.LZsJaVHEsECjt_hv1KrtbAHaHa&pid=Api&P=0" alt='card image cap' class='card-image-top md-3 rounded-lg' />`
+                : `<img width='100%' height='100%' style="object-fit: cover; object-position: center"  src="https://tse3.mm.bing.net/th?id=OIP.LZsJaVHEsECjt_hv1KrtbAHaHa&pid=Api&P=0" alt='card image cap' class='card-image-top md-3 rounded-lg' />`
             }
             <strong class="text-muted text-sm">Created on : ${date.toDateString()}</strong>
             <h3 class="my-3">${title}</h3>
@@ -125,3 +125,14 @@ const handleSubmit = (event) => {
 
 // 5. Call LoadInitialData when the page loads
 window.addEventListener('load', LoadInitialData);
+
+// 6. Open the Task Modal
+// e => is the evant (Name for argument)
+const OpenTask = (e) => {
+    if(!e) e = window.event;
+
+    const getTask = state.tasklist.find(
+        ({id}) => id === e.target.id
+    );
+    taskBody.innerHTML = htmlModelContent(getTask)
+}
