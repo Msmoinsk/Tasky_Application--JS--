@@ -1,6 +1,7 @@
 // var state = {
 //     tasklist : [
 //         {
+//             id : 01 
 //             image_url : "",
 //             task_title : "",
 //             task_type : "",
@@ -29,7 +30,7 @@ const htmlTaskContent = ({ id, title, description, type, url}) => `
                 <button type="button" class="btn btn-outline-primary m-2" name=${id}>
                     <i class="fa-solid fa-pencil" name=${id}></i>
                 </button>
-                <button type="button" class="btn btn-outline-danger m-2" name=${id}>
+                <button type="button" class="btn btn-outline-danger m-2" name=${id} onclick="DeleteTask()">
                     <i class="fa-solid fa-trash-can" name=${id}></i>
                 </button>
             </div>
@@ -136,3 +137,43 @@ const OpenTask = (e) => {
     );
     taskBody.innerHTML = htmlModelContent(getTask)
 }
+
+// 7. Delete the Task card
+// e.target = give the tag name (full)
+const DeleteTask = (e) => {
+    if(!e) e = window.event;
+
+    // Calling the attribute name="${id}"
+    const taskid = e.target.getAttribute("name")
+    // console.log(taskid);
+
+    // This is to check what tag is trigers 
+    const type = e.target.tagName;
+    console.log(type)
+
+    // By this the button behave weird on the mobile and PC
+    // In PC button only wrok if the Icon is clicked not the border
+
+    // The Below Function filter : give the array where Taskid value is not their 
+    const removeTask = state.tasklist.filter(
+        ({id}) => id !== taskid
+    );
+    state.tasklist = removeTask
+    updateLocalStorage();
+
+    // Its explations
+    // 1. We are Bounsing back to the main container [ class : task__content ]
+    // 2. From that we say toh remove all the parent nodes associated with the child node i.e button
+    // 3. we also did the same for the [ i : tag ] but 1 (.parentNode) was added
+    // hence this will delete the card on the spot  
+    if(type === "BUTTON"){
+        return e.target.parentNode.parentNode.parentNode.parentNode.removeChild(
+            e.target.parentNode.parentNode.parentNode
+        );
+    }
+    else{
+        return e.target.parentNode.parentNode.parentNode.parentNode.parentNode.removeChild(
+            e.target.parentNode.parentNode.parentNode.parentNode
+    );
+    }
+};
