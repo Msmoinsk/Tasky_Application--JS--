@@ -38,8 +38,8 @@ const htmlTaskContent = ({ id, title, description, type, url}) => `
             <div class="card-body d-flex flex-column">
                 ${
                     url 
-                    ? `<img width='100%' src='${url}' alt='Card Image' class='card-img-top rounded-lg' />`
-                    : `<img width='100%' height='150%' style="object-fit: cover; object-position: center"  src="https://tse3.mm.bing.net/th?id=OIP.LZsJaVHEsECjt_hv1KrtbAHaHa&pid=Api&P=0" alt='card image cap' class='card-image-top md-3 rounded-lg' />`
+                    ? `<img width='100%' height='150px' style="object-fit: cover; object-position: center"  src='${url}' alt='Card Image' class='card-img-top rounded-lg' />`
+                    : `<img width='100%' height='150px' style="object-fit: cover; object-position: center"  src="https://tse3.mm.bing.net/th?id=OIP.LZsJaVHEsECjt_hv1KrtbAHaHa&pid=Api&P=0" alt='card image cap' class='card-image-top md-3 rounded-lg' />`
                 }
                 <h4 class="card-title task__card__title">${title}</h4>
                 <p class="descriptions text-muted">${description}</p>
@@ -63,7 +63,7 @@ const htmlModelContent = ({ id, title, description, url}) => {
         <div id=${id}>
             ${
                 url 
-                ? `<img width='100%' src='${url}' alt='Card Image' class='card-img-top rounded-lg' />`
+                ? `<img width='100%' height='100%' style="object-fit: cover; object-position: center"  src='${url}' alt='Card Image' class='card-img-top rounded-lg' />`
                 : `<img width='100%' height='100%' style="object-fit: cover; object-position: center"  src="https://tse3.mm.bing.net/th?id=OIP.LZsJaVHEsECjt_hv1KrtbAHaHa&pid=Api&P=0" alt='card image cap' class='card-image-top md-3 rounded-lg' />`
             }
             <strong class="text-muted text-sm">Created on : ${date.toDateString()}</strong>
@@ -272,4 +272,22 @@ const saveEdit = (e) => {
     SubmitButton.setAttribute("data-bs-toggle", "modal")
     SubmitButton.setAttribute("data-bs-target", "#openModel")
     SubmitButton.innerHTML = "Open Task"
+}
+
+// Search Bsr Logic
+const searchBar = (e) => {
+    if(!e) e = window.event;
+
+    
+    while (taskContent.firstChild) {
+        taskContent.removeChild(taskContent.firstChild);
+    }
+
+    const resultData = state.tasklist.filter(({ title }) =>
+        title.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+
+    resultData.map((cardData) =>
+        taskContent.insertAdjacentHTML("beforeend", htmlTaskContent(cardData))
+    );
 }
