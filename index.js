@@ -27,7 +27,7 @@ const htmlTaskContent = ({ id, title, description, type, url}) => `
         <div class="card shadow task__card">
 
             <div class="card-header d-flex justify-content-end task__card__header">
-                <button type="button" class="btn btn-outline-primary m-2" name=${id}>
+                <button type="button" class="btn btn-outline-primary m-2" name=${id} onclick="EditTask()">
                     <i class="fa-solid fa-pencil" name=${id}></i>
                 </button>
                 <button type="button" class="btn btn-outline-danger m-2" name=${id} onclick="DeleteTask()">
@@ -44,7 +44,7 @@ const htmlTaskContent = ({ id, title, description, type, url}) => `
                 <h4 class="card-title task__card__title">${title}</h4>
                 <p class="descriptions text-muted">${description}</p>
                 <div class="Type text-white d-flex flex-wrap">
-                    <span class="badge rounded-pill text-bg-primary">${type}</span>
+                    <span class="badge rounded-pill text-bg-primary"><b>${type}</b></span>
                 </div>
             </div>
 
@@ -177,3 +177,99 @@ const DeleteTask = (e) => {
     );
     }
 };
+
+// 8. Edit Task 
+const EditTask = (e) => {
+    if(!e) e = window.event;
+
+    const targetId = e.target.id
+    const type = e.target.tagName
+
+    // These variable will be used to add the info of particular tags
+    let parentnode;
+    let task_title;
+    let task_description;
+    let task_type;
+    let SubmitButton;
+
+    if(type === "BUTTON"){
+        parentnode = e.target.parentNode.parentNode;
+    }
+    else{
+        parentnode = e.target.parentNode.parentNode.parentNode;
+    }
+
+    // let tasktitle = parentnode.childNodes[5].childNodes[1]
+    // console.log(tasktitle);
+
+    // We are accessing the Tags By going back to the to parent node and then assecing ht echild node
+    // NOTE : that the [ childNodes[3] ] []=> it only takes odd to access the desired tags
+    task_title = parentnode.childNodes[3].childNodes[3]
+    task_description = parentnode.childNodes[3].childNodes[5]
+    
+    // Type upgraded : As the issue is whole span tag gets deleted if user Remove the text 
+    // so i inserted the <b></b> to correct it
+    task_type = parentnode.childNodes[3].childNodes[7].childNodes[1].childNodes[0]
+    console.log(task_type);
+
+    SubmitButton = parentnode.childNodes[5].childNodes[1]
+
+    // Set attribute
+    task_title.setAttribute("contenteditable", "true")
+    task_description.setAttribute("contenteditable", "true")
+    task_type.setAttribute("contenteditable", "true")
+
+    // Submit
+    SubmitButton.setAttribute('onclick', 'saveEdit()')
+    // This change the atttribute in the button wherre [ opentask() is defined ]
+    SubmitButton.removeAttribute("data-bs-toggle")
+    SubmitButton.removeAttribute("data-bs-target")
+    SubmitButton.innerHTML = "Save Changes"
+}
+
+// 9. Save changes : this only trigers when the edit button clicked
+const saveEdit = (e) => {
+    if(!e) e = window.event;
+
+    const targetId = e.target.id
+
+    const parentnode = e.target.parentNode.parentNode;
+    const task_title = parentnode.childNodes[3].childNodes[3]
+    const task_description = parentnode.childNodes[3].childNodes[5]
+    const task_type = parentnode.childNodes[3].childNodes[7].childNodes[1].childNodes[0]
+
+    const SubmitButton = parentnode.childNodes[5].childNodes[1]
+
+    // This will add the Changed data to the local and state Storage
+    const updateData = {
+        taskTitle : task_title.innerHTML,
+        taskDescription : task_description.innerHTML,
+        taskType : task_type.innerHTML
+    };
+    let stateCopy = state.tasklist;
+    stateCopy = stateCopy.map(
+        (old_task) => old_task.id === targetId 
+        ? {
+            id : old_task.id,
+            url : old_task.url,
+            title : updateData.taskTitle,
+            type : updateData.taskType,
+            description : updateData.taskDescription
+        }
+        :old_task
+    );
+    state.tasklist = stateCopy
+    updateLocalStorage()
+    
+
+    task_title.setAttribute("contenteditable", "false")
+    task_description.setAttribute("contenteditable", "false")
+    task_type.setAttribute("contenteditable", "false")
+
+    // Submit
+    SubmitButton.setAttribute('onclick', 'OpenTask()')
+    // This change the atttribute in the button wherre [ opentask() is defined ]
+    SubmitButton.setAttribute("data-bs-toggle", "modal")
+    SubmitButton.setAttribute("data-bs-target", "#openModel")
+    SubmitButton.innerHTML = "Open Task"
+}
